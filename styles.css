@@ -1,0 +1,222 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f3f3f3;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 300px;
+  background-color: #002147;
+  color: white;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Logo and text below */
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.logo img {
+  width: 250px; /* Increase image size */
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.logo-text h1 {
+  margin: 5px 0;
+  font-size: 24px;
+  text-align: center;
+}
+
+.logo-text p {
+  margin: 2px 0;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Roles */
+.roles {
+  width: 100%;
+}
+
+.roles button {
+  width: 100%;
+  margin: 8px 0;
+  padding: 10px;
+  background-color: #004080;
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+/* Highlight selected role button */
+.roles button.selected {
+  background-color: #336699;
+}
+
+.roles button:hover {
+  background-color: #336699;
+}
+
+/* Login section */
+.login-box {
+  flex: 1;
+  padding: 60px 80px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card {
+  background-color: #e0e0e0;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-card h2 {
+  margin-bottom: 20px;
+  font-size: 28px;
+  color: #002147;
+}
+
+form label {
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: 600;
+}
+
+form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.forgot {
+  display: block;
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: #004080;
+  font-size: 14px;
+}
+
+.forgot:hover {
+  text-decoration: underline;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #002147;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-btn:hover {
+  background-color: #003366;
+}
+
+/* Tables */
+.table-section {
+  margin-bottom: 20px;
+}
+
+.table-section h4 {
+  margin-bottom: 10px;
+  color: #002147;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  font-size: 14px;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+th {
+  background-color: #004080;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f5f5f5;
+}
+
+/* Profile Box */
+.profile img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+/* Main area */
+.login-area {
+  flex: 1;
+  padding: 60px 80px;
+  background-color: #f3f3f3;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow-y: auto;
+}
+
+/* Card containing all content */
+.login-card {
+  background-color: #e0e0e0;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 800px;
+}
+
+/* Profile section inside the card */
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.profile img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+

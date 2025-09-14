@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Login & Register</title>
+    <!-- Tailwind CSS via CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom CSS to ensure full viewport fill */
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            min-height: 100vh;
+        }
+        /* Custom styles for the active navigation button */
+        .nav-button.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-left: 4px solid white;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body class="flex flex-col md:flex-row">
+
+    <!-- Left Sidebar Section -->
+    <div class="sidebar bg-[#1b2b44] text-white p-8 flex flex-col items-center justify-between w-full md:w-80 min-h-64 md:min-h-screen">
+        <!-- Logo and University Name -->
+        <div class="logo-section flex flex-col items-center text-center">
+            <div class="rounded-full bg-white w-20 h-20 mb-4 flex items-center justify-center">
+                <img src="christlogo.png" alt="Christ University Logo" />
+            </div>
+           
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="nav-buttons flex flex-col w-full px-4 space-y-4">
+            <button id="student-btn" class="nav-button flex items-center w-full rounded-md p-3 text-left transition-all duration-300 active">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                Student
+            </button>
+            <button id="teacher-btn" class="nav-button flex items-center w-full rounded-md p-3 text-left transition-all duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h-1a1 1 0 01-1-1V9.75a.75.75 0 01.75-.75h1.5a.75.75 0 01.75.75V19a1 1 0 001 1zM21 20h-1a1 1 0 01-1-1V5.75a.75.75 0 01.75-.75h1.5a.75.75 0 01.75.75V19a1 1 0 001 1zM13 20h-1a1 1 0 01-1-1V5.75a.75.75 0 01.75-.75h1.5a.75.75 0 01.75.75V19a1 1 0 001 1zM9 20H8a1 1 0 01-1-1V7.75a.75.75 0 01.75-.75h1.5a.75.75 0 01.75.75V19a1 1 0 001 1zM5 20H4a1 1 0 01-1-1V9.75a.75.75 0 01.75-.75h1.5a.75.75 0 01.75.75V19a1 1 0 001 1z" />
+                </svg>
+                Teacher
+            </button>
+        </div>
+
+        <div class="flex-grow"></div>
+    </div>
+
+    <!-- Right Content Section -->
+    <div class="main-content flex-1 flex flex-col items-center justify-center p-8 bg-gray-100 min-h-screen">
+        <!-- Login Card/Box -->
+        <div id="login-card" class="login-card bg-white p-10 md:p-12 rounded-lg shadow-lg max-w-lg w-full transition-opacity duration-500 ease-in-out">
+            <h2 class="text-4xl font-bold text-gray-800 mb-8">Login</h2>
+            
+            <form id="login-form" class="space-y-6">
+                <!-- Email Input -->
+                <div class="input-group">
+                    <label for="login-email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                    <input type="email" id="login-email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your email" required>
+                </div>
+
+                <!-- Password Input -->
+                <div class="input-group">
+                    <label for="login-password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                    <input type="password" id="login-password" name="password" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your password" required>
+                </div>
+                
+                <!-- Forgot Password Link -->
+                <div class="text-right">
+                    <a href="#" class="text-sm font-medium text-[#1b2b44] hover:underline">Forgot Password?</a>
+                </div>
+
+                <!-- Login Button -->
+                <button type="submit" class="w-full bg-[#1b2b44] text-white py-3 rounded-md font-semibold text-lg hover:bg-opacity-90 transition-colors duration-300">
+                    Login
+                </button>
+            </form>
+            <p class="text-center mt-6 text-sm text-gray-600">
+                Don't have an account? <a href="#" id="show-register-form" class="text-[#1b2b44] font-semibold hover:underline">Register now</a>
+            </p>
+        </div>
+
+        <!-- Registration Card/Box - Hidden by default -->
+        <div id="register-card" class="register-card bg-white p-10 md:p-12 rounded-lg shadow-lg max-w-lg w-full hidden transition-opacity duration-500 ease-in-out">
+            <h2 class="text-4xl font-bold text-gray-800 mb-8">Register</h2>
+            
+            <form id="register-form" class="space-y-6">
+                <!-- Email Input -->
+                <div class="input-group">
+                    <label for="register-email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                    <input type="email" id="register-email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your email" required>
+                </div>
+
+                <!-- Password Input -->
+                <div class="input-group">
+                    <label for="register-password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                    <input type="password" id="register-password" name="password" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter a strong password" required>
+                </div>
+
+                <!-- Register Button -->
+                <button type="submit" class="w-full bg-[#1b2b44] text-white py-3 rounded-md font-semibold text-lg hover:bg-opacity-90 transition-colors duration-300">
+                    Register
+                </button>
+            </form>
+            <p class="text-center mt-6 text-sm text-gray-600">
+                Already have an account? <a href="#" id="show-login-form" class="text-[#1b2b44] font-semibold hover:underline">Login here</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const studentBtn = document.getElementById('student-btn');
+            const teacherBtn = document.getElementById('teacher-btn');
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+            const loginCard = document.getElementById('login-card');
+            const registerCard = document.getElementById('register-card');
+            const showRegisterBtn = document.getElementById('show-register-form');
+            const showLoginBtn = document.getElementById('show-login-form');
+
+            let userRole = 'student'; // Default user role
+
+            // Function to handle button state
+            function setNavButtonActive(activeButton) {
+                const buttons = [studentBtn, teacherBtn];
+                buttons.forEach(btn => {
+                    if (btn === activeButton) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+            }
+
+            // Set initial state and user type
+            setNavButtonActive(studentBtn);
+
+            studentBtn.addEventListener('click', () => {
+                setNavButtonActive(studentBtn);
+                userRole = 'student';
+            });
+
+            teacherBtn.addEventListener('click', () => {
+                setNavButtonActive(teacherBtn);
+                userRole = 'teacher';
+            });
+
+            // Toggle between login and register forms
+            showRegisterBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                loginCard.classList.add('hidden');
+                registerCard.classList.remove('hidden');
+            });
+
+            showLoginBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                registerCard.classList.add('hidden');
+                loginCard.classList.remove('hidden');
+            });
+
+            // Handle Login Form Submission
+            loginForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const email = document.getElementById('login-email').value;
+                const password = document.getElementById('login-password').value;
+
+                try {
+                    const response = await fetch(`/api/login`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ email, password, role: userRole })
+                    });
+
+                    const result = await response.json();
+
+                    if (response.ok) {
+                        // Login successful, store the JWT
+                        localStorage.setItem('token', result.token);
+                        alert(result.message);
+                        // Redirect to the appropriate portal
+                        window.location.href = `/${userRole}-portal.html`;
+                    } else {
+                        alert(result.message);
+                    }
+
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('An error occurred during login. Please try again.');
+                }
+            });
+
+            // Handle Register Form Submission
+            registerForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const email = document.getElementById('register-email').value;
+                const password = document.getElementById('register-password').value;
+
+                try {
+                    const response = await fetch(`/api/register`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ email, password, role: userRole })
+                    });
+
+                    const result = await response.json();
+
+                    if (response.ok) {
+                        alert(result.message + ' You can now log in.');
+                        // Automatically switch to login form after successful registration
+                        registerCard.classList.add('hidden');
+                        loginCard.classList.remove('hidden');
+                    } else {
+                        alert(result.message);
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('An error occurred during registration. Please try again.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

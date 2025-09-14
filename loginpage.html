@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Christ University - Login/Register</title>
+    <link rel="stylesheet" href="stylesss.css" />
+    <style>
+      .selected {
+        background-color: #1b2b44;
+        color: white;
+      }
+      .hidden {
+        display: none;
+      }
+      .form-box {
+        background: #fff;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 100%;
+      }
+      .toggle-link {
+        color: #1b2b44;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container" style="display: flex; min-height: 100vh">
+      <!-- Sidebar (TOP aligned) -->
+      <div
+        class="sidebar"
+        style="
+          background: #1b2b44;
+          color: white;
+          padding: 2rem;
+          width: 350px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-start;
+        "
+      >
+        <div class="logo" style="margin-bottom: 2rem">
+          <img
+            src="christlogo.png"
+            alt="Christ University Logo"
+            style="max-width: 220px"
+          />
+        </div>
+        <div
+          class="roles"
+          style="display: flex; flex-direction: column; gap: 1rem; width: 100%"
+        >
+          <button type="button" data-role="student" class="selected">
+            Student
+          </button>
+          <button type="button" data-role="teacher">Teacher</button>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div
+        class="login-box"
+        style="
+          flex: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: #f0f2f5;
+        "
+      >
+        <!-- Login Form -->
+        <div id="login-form-box" class="form-box hidden">
+          <h2>Login</h2>
+          <form id="loginForm">
+            <label for="login-email">Email</label>
+            <input type="email" id="login-email" name="email" required />
+
+            <label for="login-password">Password</label>
+            <input
+              type="password"
+              id="login-password"
+              name="password"
+              required
+            />
+
+            <input type="hidden" id="selectedRole" name="role" />
+
+            <a href="#" class="forgot">Forgot Password?</a>
+            <button type="submit" class="login-btn">Login</button>
+          </form>
+          <p style="margin-top: 1rem">
+            Don't have an account?
+            <span class="toggle-link" id="show-register">Register now</span>
+          </p>
+        </div>
+
+        <!-- Register Form -->
+        <div id="register-form-box" class="form-box">
+          <h2>Register</h2>
+          <form id="registerForm">
+            <label for="reg-name">Full Name</label>
+            <input type="text" id="reg-name" name="name" required />
+
+            <label for="reg-email">Email</label>
+            <input type="email" id="reg-email" name="email" required />
+
+            <label for="reg-password">Password</label>
+            <input type="password" id="reg-password" name="password" required />
+
+            <input type="hidden" id="registerRole" name="role" />
+
+            <button type="submit" class="register-btn">Register</button>
+          </form>
+          <p style="margin-top: 1rem">
+            Already have an account?
+            <span class="toggle-link" id="show-login">Login here</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let selectedRole = "student"; // default role
+      const roleButtons = document.querySelectorAll(".roles button");
+      const hiddenLoginInput = document.getElementById("selectedRole");
+      const hiddenRegisterInput = document.getElementById("registerRole");
+
+      // set initial role
+      hiddenLoginInput.value = selectedRole;
+      hiddenRegisterInput.value = selectedRole;
+
+      // role button click
+      roleButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          selectedRole = button.getAttribute("data-role");
+          hiddenLoginInput.value = selectedRole;
+          hiddenRegisterInput.value = selectedRole;
+
+          roleButtons.forEach((btn) => btn.classList.remove("selected"));
+          button.classList.add("selected");
+        });
+      });
+
+      // Toggle forms
+      const loginBox = document.getElementById("login-form-box");
+      const registerBox = document.getElementById("register-form-box");
+      document.getElementById("show-register").addEventListener("click", () => {
+        loginBox.classList.add("hidden");
+        registerBox.classList.remove("hidden");
+      });
+      document.getElementById("show-login").addEventListener("click", () => {
+        registerBox.classList.add("hidden");
+        loginBox.classList.remove("hidden");
+      });
+
+      // Handle login
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const email = document.getElementById("login-email").value;
+          const password = document.getElementById("login-password").value;
+
+          try {
+            const res = await fetch("http://localhost:3000/api/login", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ email, password }),
+            });
+
+            const data = await res.json();
+            if (res.ok) {
+              localStorage.setItem("token", data.token);
+              localStorage.setItem("role", data.role);
+
+              alert(data.msg || "Login successful");
+
+              // Redirect based on role
+              if (data.role === "student") {
+                window.location.href = "student_dashboard.html";
+              } else if (data.role === "teacher") {
+                window.location.href = "teacher_dashboard.html";
+              }
+            } else {
+              alert(data.msg || "Login failed");
+            }
+          } catch (err) {
+            console.error("Error:", err);
+            alert("Error logging in. Please try again.");
+          }
+        });
+
+      // Handle register
+      document
+        .getElementById("registerForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const name = document.getElementById("reg-name").value;
+          const email = document.getElementById("reg-email").value;
+          const password = document.getElementById("reg-password").value;
+
+          try {
+            const res = await fetch("http://localhost:3000/api/register", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                name,
+                email,
+                password,
+                role: selectedRole, // 👈 student or teacher
+              }),
+            });
+
+            const data = await res.json();
+            if (res.ok) {
+              alert(data.msg || "User created successfully");
+              registerBox.classList.add("hidden");
+              loginBox.classList.remove("hidden");
+            } else {
+              alert(data.msg || "Registration failed");
+            }
+          } catch (err) {
+            console.error("Error:", err);
+            alert("Error registering. Please try again.");
+          }
+        });
+
+      const token = localStorage.getItem("token");
+      const role = localStorage.getItem("role");
+
+      if (!token) {
+        // Not logged in → redirect
+        window.location.href = "login.html";
+      } else {
+        console.log("Logged in as:", role);
+      }
+    </script>
+  </body>
+</html>

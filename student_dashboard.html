@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Student Exam Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <aside class="sidebar">
+        <div class="logo">
+          <img src="christlogo.png" alt="Christ University Logo" />
+        </div>
+        <div class="roles">
+          <button class="role selected">📄 Exams</button>
+        </div>
+      </aside>
+
+      <main class="login-area">
+        <div class="login-card">
+          <h2>Student Exam Portal</h2>
+          <div
+            class="profile"
+            style="display: flex; gap: 15px; margin-bottom: 20px"
+          >
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+              alt="Avatar"
+              style="width: 60px; height: 60px; border-radius: 50%"
+            />
+            <div>
+              <h3>Joey Tribiani</h3>
+              <p>
+                Roll No: 23612492<br />
+                Department: Computer Science<br />
+                Semester: 4th
+              </p>
+            </div>
+          </div>
+
+          <div class="table-section">
+            <h4>Upcoming Lab Exams</h4>
+            <table>
+              <tr>
+                <th>Subject</th>
+                <th>Exam Date</th>
+                <th>Time</th>
+                <th>Venue</th>
+              </tr>
+              <tr>
+                <td>Operating Systems</td>
+                <td>27 June 25</td>
+                <td>9:00am</td>
+                <td>Lab 254</td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="table-section" style="margin-top: 30px">
+            <h4>Past Lab Exam Results</h4>
+            <table>
+              <thead>
+                <tr>
+                  <th>Subject</th>
+                  <th>Total Marks</th>
+                  <th>Marks</th>
+                </tr>
+              </thead>
+              <tbody id="results-table-body">
+                 </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      // This function runs automatically when the page content is loaded
+      document.addEventListener("DOMContentLoaded", () => {
+        fetchExamResults();
+      });
+
+      async function fetchExamResults() {
+        // The API endpoint you provided
+        const apiUrl = "http://localhost:3000/result/iwp";
+        
+        // Find the table body element where we will insert the data
+        const tableBody = document.getElementById("results-table-body");
+        
+        // Clear any existing content and show a loading message
+        tableBody.innerHTML = '<tr><td colspan="3">Loading results...</td></tr>';
+
+        try {
+          // Fetch the data from your backend
+          const response = await fetch(apiUrl);
+          
+          // Check if the request was successful
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+
+          // Parse the JSON response
+          const data = await response.json();
+
+          // Your API returns an array, so we get the first item
+          const resultDocument = data[0]; 
+          
+          // Clear the 'Loading...' message
+          tableBody.innerHTML = "";
+
+          // Loop through each result in the 'pastExamResults' array
+          resultDocument.pastExamResults.forEach(result => {
+            // Create a new table row element (<tr>)
+            const row = document.createElement("tr");
+
+            // Fill the row with the data for each subject
+            row.innerHTML = `
+              <td>${result.subject}</td>
+              <td>${result.totalMarks}</td>
+              <td>${result.marksScored}</td>
+            `;
+
+            // Add the newly created row to the table body
+            tableBody.appendChild(row);
+          });
+
+        } catch (error) {
+          console.error("Failed to fetch exam results:", error);
+          // Show an error message in the table
+          tableBody.innerHTML = `<tr><td colspan="3">Failed to load results.</td></tr>`;
+        }
+      }
+    </script>
+  </body>
+</html>

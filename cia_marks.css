@@ -1,0 +1,159 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f3f3f3;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 300px;
+  background-color: #002147;
+  color: white;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  margin-bottom: 30px;
+  width: 100%;
+  text-align: center;
+}
+
+.logo img {
+  width: 250px;
+  height: auto;
+}
+
+.roles {
+  width: 100%;
+}
+
+.role {
+  width: 100%;
+  margin: 8px 0;
+  padding: 10px;
+  background-color: #004080;
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.role.selected,
+.role:hover {
+  background-color: #336699;
+}
+
+/* Main box */
+.login-box {
+  flex: 1;
+  padding: 60px 80px;
+  background-color: #f3f3f3;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow-y: auto;
+}
+
+.login-card {
+  background-color: #e0e0e0;
+  padding: 40px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 850px;
+}
+
+.login-card h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #002147;
+}
+
+/* Top section */
+.top-controls {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.top-controls input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  flex: 1;
+  font-size: 14px;
+}
+
+/* CIA Content layout */
+.cia-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.student-info {
+  background-color: #ddd;
+  padding: 15px 20px;
+  border-radius: 8px;
+  min-width: 250px;
+  flex: 1;
+}
+
+.student-info p {
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+/* CIA Marks Table */
+.cia-table-box {
+  flex: 1;
+  min-width: 250px;
+}
+
+.cia-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+}
+
+.cia-table th,
+.cia-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+.cia-table th {
+  background-color: #004080;
+  color: white;
+}
+
+/* CIA Total Box */
+.total-box {
+  min-width: 120px;
+  text-align: center;
+}
+
+.score-box {
+  background-color: white;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}

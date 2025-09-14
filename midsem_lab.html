@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mid-Semester Lab</title>
+    <link rel="stylesheet" href="midsem.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <div class="logo">
+          <img src="christlogo.png" alt="Christ University Logo" />
+        </div>
+        <div class="roles">
+          <button class="role" onclick="location.href='teacher_dashboard.html'">
+            🧪 Weekly Labs
+          </button>
+          <button
+            class="role selected"
+            onclick="location.href='midsem_lab.html'"
+          >
+            📘 Mid-Semester Lab
+          </button>
+          <button class="role" onclick="location.href='endsem_lab.html'">
+            📝 End Semester Lab
+          </button>
+          <button class="role" onclick="location.href='cia_marks.html'">
+            📊 Overall CIA Marks
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="login-box">
+        <div class="login-card">
+          <h2>Mid-Semester Lab</h2>
+
+          <div class="top-controls">
+            <input
+              type="text"
+              placeholder="Faculty 1 - Dr. Jyothi Mandala"
+              readonly
+            />
+            <input type="text" placeholder="🔍 Search Student" />
+            <select>
+              <option>Question-4</option>
+              <option>Question-5</option>
+            </select>
+          </div>
+
+          <table class="marks-table">
+            <thead>
+              <tr>
+                <th>Student</th>
+                <th>Writeup (20)</th>
+                <th>Execution (20)</th>
+                <th>Viva (10)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <strong>Monica Geller</strong><br />
+                  2360473<br />
+                  5 BTCS A (B2)
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    id="writeup"
+                    value="19"
+                    oninput="calculateLabTotal()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    id="execution"
+                    value="20"
+                    oninput="calculateLabTotal()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    id="viva"
+                    value="5"
+                    oninput="calculateLabTotal()"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="footer-section">
+            <div class="dropdown">
+              <label>Change of Program?</label><br />
+              <select>
+                <option>NO</option>
+                <option>YES</option>
+              </select>
+            </div>
+            <div class="lab-total">
+              <strong id="labTotal">13.2 / 15</strong><br />
+              <span>Lab Total</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function calculateLabTotal() {
+        const writeup =
+          parseFloat(document.getElementById("writeup").value) || 0;
+        const execution =
+          parseFloat(document.getElementById("execution").value) || 0;
+        const viva = parseFloat(document.getElementById("viva").value) || 0;
+
+        const totalOutOf50 = writeup + execution + viva;
+        const scaledTo15 = (totalOutOf50 / 50) * 15;
+
+        document.getElementById("labTotal").textContent =
+          scaledTo15.toFixed(1) + " / 15";
+      }
+
+      // Initial calculation on load
+      window.onload = calculateLabTotal;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Weekly Labs</title>
+  <link rel="stylesheet" href="weekly.css" />
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="logo">
+        <img src="christlogo.png" alt="Christ University Logo" />
+      </div>
+      <div class="roles">
+        <button class="role selected" onclick="location.href='teacher_dashboard.html'">🧪 Weekly Labs</button>
+        <button class="role" onclick="location.href='midsem_lab.html'">📘 Mid-Semester Lab</button>
+        <button class="role" onclick="location.href='endsem_lab.html'">📝 End Semester Lab</button>
+        <button class="role" onclick="location.href='cia_marks.html'">📊 Overall CIA Marks</button>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="login-box">
+      <div class="login-card">
+        <h2>Weekly Labs</h2>
+
+        <div class="top-controls">
+          <input type="text" placeholder="Faculty 1 - Dr. Jyothi Mandala" readonly />
+          <input type="text" placeholder="🔍 Search Student" />
+          <select>
+            <option>Experiment 1</option>
+            <option>Experiment 2</option>
+            <option>Experiment 3</option>
+          </select>
+        </div>
+
+        <table class="marks-table">
+          <thead>
+            <tr>
+              <th>Student</th>
+              <th>Observation (10)</th>
+              <th>Record (10)</th>
+              <th>Execution (30)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <strong>Monica Geller</strong><br />
+                2360473<br />
+                5 BTCS A (B2)
+              </td>
+              <td><input type="number" /></td>
+              <td><input type="number" /></td>
+              <td><input type="number" /></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <button class="comment-btn">+ Add comments if any</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

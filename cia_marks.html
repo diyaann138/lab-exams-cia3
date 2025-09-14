@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Overall CIA Marks</title>
+    <link rel="stylesheet" href="cia_marks.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <div class="logo">
+          <img src="christlogo.png" alt="Christ University Logo" />
+        </div>
+        <div class="roles">
+          <button class="role" onclick="location.href='teacher_dashboard.html'">
+            🧪 Weekly Labs
+          </button>
+          <button class="role" onclick="location.href='midsem_lab.html'">
+            📘 Mid-Semester Lab
+          </button>
+          <button class="role" onclick="location.href='endsem_lab.html'">
+            📝 End Semester Lab
+          </button>
+          <button
+            class="role selected"
+            onclick="location.href='cia_marks.html'"
+          >
+            📊 Overall CIA Marks
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="login-box">
+        <div class="login-card">
+          <h2>Overall CIA Marks</h2>
+
+          <div class="top-controls">
+            <input
+              type="text"
+              placeholder="Faculty 1 - Dr. Jyothi Mandala"
+              readonly
+            />
+            <input type="text" placeholder="🔍 Search Student" />
+          </div>
+
+          <div class="cia-content">
+            <div class="student-info">
+              <p><strong>Name:</strong> Chandler Bing</p>
+              <p><strong>Register No:</strong> 2360478</p>
+              <p><strong>Class:</strong> 5BTCS A</p>
+              <p><strong>Batch:</strong> B2</p>
+            </div>
+
+            <div class="cia-table-box">
+              <table class="cia-table">
+                <tr>
+                  <th>Category</th>
+                  <th>Marks Obtained</th>
+                </tr>
+                <tr>
+                  <td>Rec+Obs</td>
+                  <td>4.5/05</td>
+                </tr>
+                <tr>
+                  <td>Exec+Viva</td>
+                  <td>4.5/05</td>
+                </tr>
+                <tr>
+                  <td>Mid-Sem</td>
+                  <td>14/15</td>
+                </tr>
+                <tr>
+                  <td>End-Sem</td>
+                  <td>24/25</td>
+                </tr>
+              </table>
+            </div>
+
+            <div class="total-box">
+              <div class="score-box">47</div>
+              <p>Total CIA Marks</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
