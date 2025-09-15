@@ -192,8 +192,14 @@
                         // Login successful, store the JWT
                         localStorage.setItem('token', result.token);
                         alert(result.message);
-                        // Redirect to the appropriate portal
-                        window.location.href = `/${userRole}-portal.html`;
+                        // Redirect to the appropriate dashboard
+                        if (userRole === 'student') {
+                            window.location.href = '/student_dashboard.html';
+                        } else if (userRole === 'teacher') {
+                            window.location.href = '/teacher_dashboard.html';
+                        } else {
+                            window.location.href = '/admin_dashboard.html';
+                        }
                     } else {
                         alert(result.message);
                     }

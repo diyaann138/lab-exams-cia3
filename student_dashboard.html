@@ -14,6 +14,7 @@
         </div>
         <div class="roles">
           <button class="role selected">📄 Exams</button>
+          <button class="role" onclick="logout()">🚪 Logout</button>
         </div>
       </aside>
 
@@ -76,14 +77,20 @@
     </div>
 
     <script>
-      // This function runs automatically when the page content is loaded
+      // Check authentication before loading the page
       document.addEventListener("DOMContentLoaded", () => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          alert('Please login first');
+          window.location.href = '/index.html';
+          return;
+        }
         fetchExamResults();
       });
 
       async function fetchExamResults() {
         // The API endpoint you provided
-        const apiUrl = "http://localhost:3000/result/iwp";
+        const apiUrl = "http://localhost:3000/api/results/iwp";
         
         // Find the table body element where we will insert the data
         const tableBody = document.getElementById("results-table-body");
@@ -130,6 +137,12 @@
           // Show an error message in the table
           tableBody.innerHTML = `<tr><td colspan="3">Failed to load results.</td></tr>`;
         }
+      }
+
+      function logout() {
+        localStorage.removeItem('token');
+        alert('Logged out successfully');
+        window.location.href = '/index.html';
       }
     </script>
   </body>

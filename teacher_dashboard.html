@@ -18,6 +18,7 @@
         <button class="role" onclick="location.href='midsem_lab.html'">📘 Mid-Semester Lab</button>
         <button class="role" onclick="location.href='endsem_lab.html'">📝 End Semester Lab</button>
         <button class="role" onclick="location.href='cia_marks.html'">📊 Overall CIA Marks</button>
+        <button class="role" onclick="logout()">🚪 Logout</button>
       </div>
     </div>
 
@@ -63,5 +64,23 @@
       </div>
     </div>
   </div>
+
+  <script>
+    // Check authentication before loading the page
+    document.addEventListener("DOMContentLoaded", () => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert('Please login first');
+        window.location.href = '/index.html';
+        return;
+      }
+    });
+
+    function logout() {
+      localStorage.removeItem('token');
+      alert('Logged out successfully');
+      window.location.href = '/index.html';
+    }
+  </script>
 </body>
 </html>

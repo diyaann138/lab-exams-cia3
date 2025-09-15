@@ -1,23 +1,27 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const bcrypt = require('bcrypt'); // For password hashing
-const jwt = require('jsonwebtoken'); // For JWT authentication
-const mongoose = require('mongoose'); // For MongoDB connection
-const { default: connectDB } = require('../db');
+import express from 'express';
+import bodyParser from 'body-parser';
+import bcrypt from 'bcrypt'; // For password hashing
+import jwt from 'jsonwebtoken'; // For JWT authentication
+import mongoose from 'mongoose'; // For MongoDB connection
+import cors from 'cors';
+import dotenv from 'dotenv';
+import studentRouter from './routes/student.js';
+import resultRouter from './routes/result.js';
+import marksRouter from './routes/marks.js';
 
+dotenv.config();
 const app = express();
-connectDB();
 
 const PORT = 3000;
 const JWT_SECRET = 'd3c6bb581976c311c5086e4da0ec613f281c807e4df1593202adf7462ead4ebe'; // CHANGE THIS IN PRODUCTION!
 
 // Middleware
+app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static('public')); // Serve the frontend from a folder named 'public'
+app.use(express.static('.')); // Serve static files from current directory
 
 // MongoDB Connection
-// IMPORTANT: Replace the connection string with your MongoDB URI
-const MONGODB_URI = 'mongodb+srv://<username>:<password>@clustername.mongodb.net/university-auth?retryWrites=true&w=majority';
+const MONGODB_URI = process.env.MONGO_URL || 'mongodb://localhost:27017/lab-exams-cia3';
 mongoose.connect(MONGODB_URI)
     .then(() => console.log('Successfully connected to MongoDB'))
     .catch(err => console.error('MongoDB connection error:', err));
@@ -137,6 +141,11 @@ app.get('/api/profile', verifyToken, (req, res) => {
         user: req.user
     });
 });
+
+// Route middleware
+app.use('/api/students', studentRouter);
+app.use('/api/results', resultRouter);
+app.use('/api/marks', marksRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
